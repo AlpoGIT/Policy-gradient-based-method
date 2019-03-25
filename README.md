@@ -13,6 +13,6 @@ We use a neural network to parametrize the policy. Convergence is not always ach
 When using two hidden layers (fully connected), learning generally fails (see below).
 ![Local optimum](local_minimum.png)
 
-Generally speaking, as stated in Sutton (2018), backpropagation algorithm can produce good results for shallow networks, but it may not work well for deeper networks. A shallow network with one hidden layer (unit number = 8) is used to solve this environment.
+Generally speaking, as stated in Sutton (2018), backpropagation algorithm can produce good results for shallow networks, but it may not work well for deeper networks. A shallow network with one hidden layer (unit number = 4) is used to solve this environment.
 ![Solved](solved_shallow_ANN.png)
 
