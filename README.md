@@ -10,4 +10,4 @@ REINFORCE produces slow learning as a Monte Carlo method with potential high var
 We use a neural network to parametrize the policy. Convergence is not always achieved. Oscillations may appear.
 
 # 'Slow learning' and oscillations
-[Environment solved](CarPole_Oscillations.png)
+![Environment solved](CarPole_Oscillations.png)
