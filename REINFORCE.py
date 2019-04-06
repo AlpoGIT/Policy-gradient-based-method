@@ -82,12 +82,13 @@ for i in range(1, budget + 1 ):
     #
     gammas = np.array([gamma**i for i in range(len(rewards))])
     rewards = np.array(rewards)
-    G = np.sum(np.multiply(gammas, rewards))
+    G = np.multiply(gammas, rewards)
 
     # maximize G*ln\ pi i.e. minimize -G*ln\ pi
+    # with Markov credit assignment np.sum(G[t:]), instead of np.sum(G)
     loss = 0
     for t, log_prob in enumerate(log_probs):
-        loss += torch.mul(torch.tensor(-G*gamma**t), log_prob)
+        loss += torch.mul(torch.tensor(-np.sum(G[t:])*gamma**t), log_prob)
     optim.zero_grad()
     loss.backward()
     optim.step()
