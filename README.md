@@ -23,6 +23,6 @@ Generally speaking, as stated in Sutton (2018), backpropagation algorithm can pr
 ![Solved](solved_shallow_ANN.png)
 
 # Proximal policy optimization (PPO)
-Below the result with the PPO algorithm and an entropy term.
+Below the result with the PPO algorithm and an entropy term where it solves this environment 10 times faster than REINFORCE (in terms of episode number).
 
 ![PPO](cartpole_PPO.png)
