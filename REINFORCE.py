@@ -59,10 +59,6 @@ alpha = 0.01
 budget = 6000
 optim = torch.optim.Adam(policy.parameters(), lr = alpha)
 
-
-
-
-
 for i in range(1, budget + 1 ):
     score = 0
     rewards = []
@@ -70,6 +66,7 @@ for i in range(1, budget + 1 ):
     # generate episode
     state = env.reset()
     action, log_prob = policy.act(state)
+    
     while True:
         action, log_prob = policy.act(state)
         next_state, reward, done, _ = env.step(action)
@@ -77,18 +74,15 @@ for i in range(1, budget + 1 ):
         log_probs.append(log_prob)
         score += reward
         state = next_state
+        
         if done == True:
             break
-    #
-    gammas = np.array([gamma**i for i in range(len(rewards))])
-    rewards = np.array(rewards)
+            
+    # loss
+    gammas = np.array([gamma**t for t in range(0,len(rewards))])
     G = np.multiply(gammas, rewards)
-
-    # maximize G*ln\ pi i.e. minimize -G*ln\ pi
-    # with Markov credit assignment np.sum(G[t:]), instead of np.sum(G)
-    loss = 0
-    for t, log_prob in enumerate(log_probs):
-        loss += torch.mul(torch.tensor(-np.sum(G[t:])*gamma**t), log_prob)
+    G = np.array([ np.sum(G[t:]*gamma**t) for t in range(0,len(rewards)) ])
+    loss = -np.multiply(np.array(log_probs),G).sum()
     optim.zero_grad()
     loss.backward()
     optim.step()
