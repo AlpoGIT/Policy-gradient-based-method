@@ -81,7 +81,7 @@ for i in range(1, budget + 1 ):
     # loss
     gammas = np.array([gamma**t for t in range(0,len(rewards))])
     G = np.multiply(gammas, rewards)
-    G = np.array([ np.sum(G[t:]*gamma**t) for t in range(0,len(rewards)) ])
+    G = np.array([ np.sum(G[t:]/gamma**t) for t in range(0,len(rewards)) ])
     loss = -np.multiply(np.array(log_probs),G).sum()
     optim.zero_grad()
     loss.backward()
