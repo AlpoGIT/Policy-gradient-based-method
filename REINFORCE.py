@@ -18,7 +18,7 @@ action_dim = 2
 # function approximator
 # map state to prob(action|state)
 class model(nn.Module):
-    def __init__(self, state_dim, action_dim, fc1 = 4):
+    def __init__(self, state_dim, action_dim, fc1 = 2):
         super(model, self).__init__()
         self.fc1 = nn.Linear(state_dim, fc1)
         self.fc2 = nn.Linear(fc1, action_dim)
